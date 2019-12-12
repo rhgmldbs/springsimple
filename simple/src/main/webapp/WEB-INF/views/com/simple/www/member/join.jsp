@@ -104,9 +104,9 @@
          var sid = $('#id').val();
          
          $.ajax({
-            url : "/member/idCheck.ck",
+            url : "/www/member/idCheck.van",
             type : "post",
-            dataType : "json",
+             dataType : "json", 
             data : {
                "id" : sid
             },

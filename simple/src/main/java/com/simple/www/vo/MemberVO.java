@@ -27,11 +27,25 @@ public class MemberVO {
 	private Time joinTime;
 	private String sDate;
 	private String sTime;
+	private int cnt;
+	private String avt;
 	
 	
 	
 	
 
+	public String getAvt() {
+		return avt;
+	}
+	public void setAvt(String avt) {
+		this.avt = avt;
+	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
 	public int getMno() {
 		return mno;
 	}
