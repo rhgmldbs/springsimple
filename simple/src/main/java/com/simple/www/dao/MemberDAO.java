@@ -60,7 +60,7 @@ public class MemberDAO {
 		return list;
 	}
 
-	public int boardwrite(BoardVO vo) {
+	public int boardwrite(BoardVO vo) { 
 		int cnt= sqlSession.insert("mSQL.boardwrite");
 				return cnt;
 		
