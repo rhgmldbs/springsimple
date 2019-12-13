@@ -27,19 +27,35 @@ public class MemberVO {
 	private Time joinTime;
 	private String sDate;
 	private String sTime;
+	
 	private int cnt;
-	private String avt;
+	private int avt; //아바타 번호 저장
+	public int getAvt() {
+		return avt;
+	}
+	private String avatar; //아바타 파일 저장 
 	
 	
+	
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	public void setAvt(int avt) {
+		this.avt = avt;
+	}
+	public String getGen() {
+		return gen;
+	}
+	public void setGen(String gen) {
+		this.gen = gen;
+	}
+	private String gen;
 	
 	
 
-	public String getAvt() {
-		return avt;
-	}
-	public void setAvt(String avt) {
-		this.avt = avt;
-	}
 	public int getCnt() {
 		return cnt;
 	}

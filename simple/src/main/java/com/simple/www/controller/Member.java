@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.simple.www.dao.MemberDAO;
+import com.simple.www.vo.BoardVO;
 import com.simple.www.vo.MemberVO;
 
 @Controller
@@ -135,5 +136,28 @@ public class Member {
 	 */
 		return vo;
 }
+	
+	
+	@RequestMapping("membInfo")
+	@ResponseBody
+	public MemberVO membInfo (String id) {
+		MemberVO vo= mDAO.membInfo(id);
+				return vo;
+		
+	}
+	
+	
+	
+	@RequestMapping("editInfo")
+	
+	public @ResponseBody MemberVO editInfo(MemberVO vo) {
+		System.out.println(vo.getMno());
+		vo.setCnt(mDAO.editInfo(vo));
+		
+		return vo;
+		
+	}
+	
+	
 	
 }

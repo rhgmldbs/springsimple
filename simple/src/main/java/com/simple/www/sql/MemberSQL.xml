@@ -97,6 +97,60 @@
                            <typeAlias alias="???" type="경로" />
                         </typeAliases>
 -->
+   <!-- 
+  <sql> 
+   반복해서 작성해야 되는 질의명령을 미리 작성을 해놓고 
+   이후 필요한 라인에 추가해서 사용하도록 해주는 태그가 <sql>태그이다.
+   
+   하지만 이것도 태그이므로 아이디가 존재해야 선택해서 사용할 수 있을것이다.
+ 따라서 작성할 때 아이디도 같이 작성해야 한다.
+ 
+ 그냥 질의명령을 담아놓은 태그
+ parameter 와 result 타입은 존재하지 않는다
+ 
+ 
+ 
+ 사용방법]
+ <include refid="id값"  />
+  
+   
+   --> 
+      <!-- 
+      예시
+      
+      <sql id ="selCNT">
+      SELECT
+      
+      	count(*)cnt
+      	FROM
+      	member
+      	
+      	WHERE
+      	
+      	m_id =
+      	
+      
+      </sql>
+       -->
+       
+    <!--   <select id="Login" resultType="int" parameterType="mVO">
+      SELECT
+         count(*) cnt
+      FROM
+         member
+      WHERE
+         m_id = #{id}
+
+ <include refid="i"> #{id}
+
+   </select>
+      
+      
+       -->
+      
+      
+      
+      
          <!-- 로그인 질의문 -->
    <select id="Login" resultType="int" parameterType="mVO">
       SELECT
@@ -106,6 +160,8 @@
       WHERE
          m_id = #{id}
          AND m_pw = #{pw}
+         
+         
    </select>
    <!-- 
       mybatis 에서는 JSP에서 사용하던 것 처럼 변동 데이터에 ?를 사용해서 처리하지 않는다.
@@ -118,6 +174,12 @@
          이때 마이바티스는 자동으로 해당 변수의 getter 함수를 호출해서 
     -->
       <!-- 중복확인 질의문 -->
+      
+      
+   
+
+   
+      
    <select id="idCount" resultType="mVO" parameterType ="String">
       SELECT
          count(*) cnt
@@ -127,13 +189,13 @@
          m_id = #{id}
    </select>
    
-   <insert id="Join" parameterType="mVO">
+  <!--  <insert id="Join" parameterType="mVO">
       INSERT INTO 
          member 
       VALUES( 
          (SELECT NVL(MAX(m_no)+1,1001) FROM member), 
          #{id}, #{pw}, #{name}, #{mail}, #{tel}, sysdate, 11, 'M' )
-   </insert>
+   </insert> -->
    
    
    <select id="showName" parameterType="mVO" resultType="String">
@@ -145,18 +207,77 @@
          m_no = #{mno}
    </select>
    
+   
+   <insert id="addMember" parameterType ="mVO"> <!-- 회원가입 -->
+ 	<selectKey keyProperty="mno" resultType="int" order="BEFORE">
+ 	SELECT
+ 		NVL(MAX(m_no)+ 1 , 1001)
+ 	FROM
+ 		member
+ 	
+ 	 </selectKey>
+ 
+ 
+ 	INSERT INTO
+ 		member
+ 		
+ 	VALUES(
+ 		<!-- (SELECT NVL(MAX(m_no)+1), 1001) FROM member)--> 	
+    	#{mno},#{id},#{pw},#{name},#{mail},#{tel},sysdate,#{avt},#{gen} 
+   
+   )
+   
+   </insert> 
+ <update id="editInfo" parameterType="mVO"> <!-- 회원정보수정 -->
+ UPDATE
+ 	member
+
+<trim prefix="SET" suffixOverrides=",">
+	<if test="pw != null">m_pw =#{pw},</if>
+	<if test="mail != null">m_mail =#{mail},</if>
+	<if test="tel != null">m_tel =#{tel},</if>
+	<if test="tel != null">m_avt =#{avt},</if>
+</trim>
+ WHERE
+ 
+ 	m_no =${mno}
+ 
+ </update>  
+   
+   
+   
    <select id="showId" resultType="mVO">
    SELECT
-   		m_id id, (SELECT a_img FROM avatar WHERE a_no=m_avt) avt
+   		m_id id, (SELECT a_img FROM avatar WHERE a_no=m_avt) avatar
    FROM
    		member
    
   
    </select>
    
+   <select id="membInfo" resultType="mVO" parameterType="String">
+   
+   SELECT
+   	m_no mno, m_id mid, m_name mname, m_mail mmail,
+   	m_tel tel, to_char(m_join,'yyyy-mm-dd HH24:MI:ss') sDate, 
+   	m_avt avt, a_img avatar 
+   	
+   	FROM
+   	
+   	member, avatar
+   	
+   	WHERE
+   		m_avt =a_no
+   AND	m_id=#{id}
    
    
-   <select id ="idCheck" resultType ="String" parameterType="String">
+   </select>
+   
+   
+   
+   
+   
+   <select id ="idCheck" resultType ="String" parameterType="String" >
    SELECT
    
    	count (m_id) cnt
@@ -167,5 +288,42 @@
    		m_id = #{id}	
     
    </select>
+ 
+<select id="boardlist" resultType="bVO" >
+SELECT
+bno,title,bbody,bdate,(SELECT m_id FROM member WHERE m_no=mno ) id
+
+FROM
+board
+WHERE
+ isshow='Y'
+
+</select>
+   
+  
+  <insert id="boardwrite" parameterType="bVO"> <!-- 방명록 글쓰기 -->
+<selectKey keyProperty="mno" resultType="int" order="BEFORE">
+ 	SELECT
+	m_no
+	
+ 	FROM
+ 		member
+ 	WHERE
+ 	m_id = #{id}
+ 	 
+ 	 </selectKey>
+	INSERT INTO
+	
+		board(bno,mno,title,bbody)
+		
+	VALUES(
+	
+	(SELECT NVL(MAX(bno)+1,1001) FROM board),#{mno},#{title},#{bbody}
+
+	)
+
+  </insert> 
+  
+   
    
 </mapper>

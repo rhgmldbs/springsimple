@@ -30,11 +30,11 @@
 			// 해당 태그에 적용시켜주면 된다.
 			
 			$.ajax({
-				url : "/member/membInfo.ck",
+				url : "/www/member/membInfo.van",
 				type : "post",
 				dataType : "json",
 				data : {
-					mid : tid
+					id : tid
 				},
 				success : function(data){
 					alert("success");
@@ -42,8 +42,8 @@
 					$('#mid').html(data.mid);
 					$('#mname').html(data.mname);
 					$('#mmail').html(data.mmail);
-					$('#mtel').html(data.mtel);
-					$('#mdate').html(data.mdate);
+					$('#mtel').html(data.tel);
+					$('#mdate').html(data.sDate);
 					$('#detail').css('display', 'block');
 					
 					$('#infoEdit').click(function(){
@@ -51,8 +51,8 @@
 						$('#id').html(data.mid);
 						$('#name').html(data.mname);
 						$('#mail').val(data.mmail);
-						$('#tel').val(data.mtel);
-						$('#date').html(data.mdate);
+						$('#tel').val(data.tel);
+						$('#date').html(data.sDate);
 						$('#detail').css('display', 'none');
 						$('#edit').css('display', 'block');			
 					});
@@ -64,6 +64,7 @@
 		});
 		
 		$('#save').click(function(){
+			
 			// 할일
 			// 데이터읽어오고
 			var mail1 = $('#mmail').text();
@@ -71,30 +72,18 @@
 			var tel1 = $('#mtel').text();
 			var tel2 = $('#tel').val();
 			var no = $('#no').text();
-			var code = 1;
 			
 			if(mail1 == mail2 && tel1 == tel2){
 				return;
-			} else if(mail1 == mail2){
-				// 전화번호만 수정한 경우
-				code = 3;
-			} else if(tel1 == tel2){
-				// 메일만 수정한 경우
-				code = 2;
-			} else {
-				// 전화번호와 메일 둘다 수정한 경우
-				code = 1;
-			}
-			
+			}			
 			$.ajax({
-				url : "/member/infoEdit.ck",
+				url : "/www/member/infoEdit.van",
 				type: "post",
 				dataType: "json",
 				data : {
 					"mno" : no,
 					"mail" : mail2,
 					"tel" : tel2,
-					"code" : code
 				},
 				success : function(data){
 					if(data.cnt == 1){
@@ -158,6 +147,10 @@
 			$(location).attr('href','/www/member/showId.van')
 		});
 		
+		$('#boardlist').click(function(){
+			$(location).attr('href','/www/board/boardlist.van')
+		});
+		
 		
 		
 /* 		
@@ -189,6 +182,7 @@
 			<div class="w3-col m2 w3-blue-grey w3-button" id="reboard">댓글게시판</div>
 			<div class="w3-col m2 w3-blue-khaki w3-button" id="survey">설문조사</div>
 			<div class="w3-col m2 w3-blue-blue w3-button" id="idlist">아이디리스트 </div>
+			<div class="w3-col m2 w3-deep-purple w3-button" id="boardlist">방명록 작성하기 </div>
 			
 			
 		</div>
