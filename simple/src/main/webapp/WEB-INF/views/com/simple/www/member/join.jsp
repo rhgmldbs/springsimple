@@ -165,7 +165,7 @@
    <div class="container">
       <div class="joinLogo">J O I N</div>
       <div class="listbox">
-   <form method="POST" action="/www/member/joinProc.van">
+   <form method="POST" action="/www/member/joinProc.van" enctype="muitpart/form-data">
       <ul class="ulcl w3-margin-bottom w3-padding">
          <li id="idli">
             <label for="id">I D</label>

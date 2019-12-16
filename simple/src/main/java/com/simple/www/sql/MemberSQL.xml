@@ -314,11 +314,11 @@ WHERE
  	 </selectKey>
 	INSERT INTO
 	
-		board(bno,mno,title,bbody)
+		board(bno, mno, title, bbody)
 		
 	VALUES(
 	
-	(SELECT NVL(MAX(bno)+1,1001) FROM board),#{mno},#{title},#{bbody}
+  	(SELECT NVL(MAX(bno) +1, 1001) FROM board), #{mno}, #{title}, #{bbody}
 
 	)
 

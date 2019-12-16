@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.simple.www.dao.MemberDAO;
 import com.simple.www.vo.BoardVO;
 import com.simple.www.vo.MemberVO;
+import com.simple.www.services.*;
 
 @Controller
 @RequestMapping("/member/")
@@ -22,7 +24,9 @@ public class Member {
 
 	@Autowired
 	MemberDAO mDAO;
-
+	@Autowired
+	FileService fileSrvc;
+	
 	@RequestMapping("login.van")
 	public ModelAndView loginForm(ModelAndView mv) {
 
@@ -30,7 +34,7 @@ public class Member {
 
 		return mv;
 	}
-
+  
 	@RequestMapping("join.van")
 	public ModelAndView joinForm(ModelAndView mv) {
 		mv.setViewName("member/join");
@@ -123,7 +127,7 @@ public class Member {
 	 
 	 
 	 방법]
-	 	실행함수의 반환값을 VO ㄹ타입으로  정하고
+	 	실행함수의 반환값을 VO 타입으로  정하고
 	 	함수에 
 	 		@ResponseBody
 	 		라는 어노테이션을 붙여주면 된다.
@@ -158,6 +162,11 @@ public class Member {
 		
 	}
 	
+	@RequestMapping("fileUp.van")
+	public void fileUp(MultipartFile upfile, HttpSession session) {
+		
+		fileSrvc.singleUpProc(upfile , session);
+	}
 	
 	
 }
