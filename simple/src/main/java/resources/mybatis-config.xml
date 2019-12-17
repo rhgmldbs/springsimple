@@ -39,9 +39,10 @@
    <typeAliases>
       <typeAlias alias="mVO" type="com.simple.www.vo.MemberVO"/>
       <typeAlias alias="bVO" type="com.simple.www.vo.BoardVO"/>
-      
+      <typeAlias alias="fVO" type="com.simple.www.vo.FileVO"/>
+      <typeAlias alias="gVO" type="com.simple.www.vo.GalleryVO"/>
+
    </typeAliases>
-   
    
   
    
@@ -55,10 +56,8 @@
   	-->
   
    <mappers>
-      <mapper resource="com/simple/www/sql/MemberSQL.xml"/>
-      
+      <mapper resource="com/simple/www/sql/MemberSQL.xml" />
    </mappers>
-   
    
    
    

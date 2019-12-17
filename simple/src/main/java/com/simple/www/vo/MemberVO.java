@@ -1,6 +1,9 @@
 package com.simple.www.vo;
 
 import java.text.*;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.sql.*;
@@ -28,10 +31,35 @@ public class MemberVO {
 	private String sDate;
 	private String sTime;
 	
+	
+	  
+	   private MultipartFile sFile;
+	   private MultipartFile[] file;
+	   
+	
+	   
 	private int cnt;
 	private int avt; //아바타 번호 저장
+	
+	
+	
+	public MultipartFile getsFile() {
+		return sFile;
+	}
+	public void setsFile(MultipartFile sFile) {
+		this.sFile = sFile;
+	}
+	public MultipartFile[] getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile[] file) {
+		this.file = file;
+	}
 	public int getAvt() {
 		return avt;
+		
+		
+		
 	}
 	private String avatar; //아바타 파일 저장 
 	

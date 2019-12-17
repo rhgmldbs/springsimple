@@ -13,5 +13,7 @@
 
 
     <bean id="mDAO" class="com.simple.www.dao.MemberDAO"/>  
+   	<bean id ="fDAO" class="com.simple.www.dao.FileDAO"/>  
+   	
    
 </beans>

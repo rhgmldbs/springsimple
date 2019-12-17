@@ -2,6 +2,8 @@ package com.simple.www.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -9,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.simple.www.dao.FileDAO;
 import com.simple.www.dao.MemberDAO;
+import com.simple.www.services.FileService;
 import com.simple.www.vo.BoardVO;
+import com.simple.www.vo.GalleryVO;
+import com.simple.www.vo.MemberVO;
 
 
 @Controller
@@ -19,7 +25,10 @@ public class Board {
 
 	@Autowired
 	MemberDAO mDAO;
-	
+	@Autowired
+	FileService fileSrvc;
+	@Autowired
+	FileDAO fDAO;
 	
 	@RequestMapping("boardlist.van")
 	public ModelAndView boardlist(ModelAndView mv) {
@@ -50,5 +59,30 @@ public class Board {
 		mv.setView(rv);
 		return mv;
 	}
+	
+	
+	@RequestMapping("uploading.van")
+	public void uploadingform() {
+		
+	}
+	
+	@RequestMapping("gallery.van")
+	public ModelAndView galleryproc(ModelAndView mv, GalleryVO vo,  HttpSession session, RedirectView rv) {
+		
+		fileSrvc.setDAO(fDAO);
+		fileSrvc.Galleryup(session, vo);
+	
+		
+		/* mv.addObject("CNT",vo); */
+		rv.setUrl("/www/main.van");
+		mv.setView(rv);
+		
+
+			
+		return mv;
+	}
+	
+	
+	
 	
 }

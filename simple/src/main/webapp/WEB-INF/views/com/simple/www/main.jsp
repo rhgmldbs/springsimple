@@ -151,6 +151,10 @@
 			$(location).attr('href','/www/board/boardlist.van')
 		});
 		
+		$('#gallerylist').click(function(){
+			$(location).attr('href','/www/board/gallery.van')
+		});
+		
 		
 		
 /* 		
@@ -178,11 +182,12 @@
 				<div class="w3-col m2 w3-pink w3-button" id="logout">로그아웃</div>
 				<div class="w3-col m2 w3-deep-purple w3-button" id="memberInfo">회원정보보기</div>
 			</c:if>
-			<div class="w3-col m2 w3-aqua w3-button" id="boardList">파일업로드게시판</div>
+			<div class="w3-col m2 w3-aqua w3-button" id="FileList">파일업로드게시판</div>
 			<div class="w3-col m2 w3-blue-grey w3-button" id="reboard">댓글게시판</div>
 			<div class="w3-col m2 w3-blue-khaki w3-button" id="survey">설문조사</div>
 			<div class="w3-col m2 w3-blue-blue w3-button" id="idlist">아이디리스트 </div>
 			<div class="w3-col m2 w3-deep-purple w3-button" id="boardlist">방명록 작성하기 </div>
+			<div class="w3-col m2 w3-deep-pink w3-button" id="gallerylist">갤러리 게시판  </div>
 			
 			
 		</div>
