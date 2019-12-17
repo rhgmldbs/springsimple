@@ -1,5 +1,7 @@
 package com.simple.www.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,4 +20,13 @@ public class FileDAO {
    public int insertgalley(GalleryVO gVO){
 	   return sqlSession.insert("mSQL.addgallery",gVO);
    }
+  //갤러리 파일 리스트 처리 함수
+   public List<GalleryVO> gallerylist(){
+	   List<GalleryVO> list =sqlSession.selectList("mSQL.gallerylist");
+	   
+	   return list;
+	   
+   }
+   
+   
 }

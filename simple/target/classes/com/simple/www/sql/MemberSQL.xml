@@ -248,5 +248,16 @@
    </insert>
    
    
+   <select id="gallerylist" resultType="gVO">
+   
+   SELECT 
+    gno, gtitle title, gdir dir, gsavename saveName,(SELECT m_id FROM member WHERE m_no =gmno )id
+    
+   FROM
+   gallery
+	ORDER BY gno dese
+
+   </select>
+   
    
 </mapper>
