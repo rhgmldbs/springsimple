@@ -37,10 +37,13 @@
    	
     -->
    <typeAliases>
+   
+      <typeAlias alias="page" type="com.simple.www.util.PageUtil"/>
       <typeAlias alias="mVO" type="com.simple.www.vo.MemberVO"/>
       <typeAlias alias="bVO" type="com.simple.www.vo.BoardVO"/>
       <typeAlias alias="fVO" type="com.simple.www.vo.FileVO"/>
       <typeAlias alias="gVO" type="com.simple.www.vo.GalleryVO"/>
+      <typeAlias alias="rbVO" type="com.simple.www.vo.ReboardVO"/>
 
    </typeAliases>
    
@@ -56,7 +59,9 @@
   	-->
   
    <mappers>
+      
       <mapper resource="com/simple/www/sql/MemberSQL.xml" />
+      <mapper resource="com/simple/www/sql/ReBoardSQL.xml" />
    </mappers>
    
    

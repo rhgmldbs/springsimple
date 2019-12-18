@@ -27,6 +27,7 @@ public class Board {
 	MemberDAO mDAO;
 	@Autowired
 	FileService fileSrvc;
+	
 	@Autowired
 	FileDAO fDAO;
 	
@@ -62,9 +63,11 @@ public class Board {
 	
 	
 	@RequestMapping("uploading.van")
-	public void uploadingform() {
+	public void uploadingform(ModelAndView mv) {
+		mv.setViewName("board/uploading");
 		
 	}
+	
 	
 	@RequestMapping("gallery.van")
 	public ModelAndView galleryproc(ModelAndView mv, GalleryVO vo,  HttpSession session, RedirectView rv) {
@@ -76,22 +79,23 @@ public class Board {
 		/* mv.addObject("CNT",vo); */
 		rv.setUrl("/www/main.van");
 		mv.setView(rv);
-		
-
 			
 		return mv;
 	}
 	
 	
+	
+	
 	@RequestMapping("gallerylist.van")
 	public ModelAndView gallerylist(ModelAndView mv) {
 		List<GalleryVO> list = fDAO.gallerylist();
-		mv.setViewName("/board/gallery");
 		mv.addObject("LIST", list);
+		mv.setViewName("board/gallery");
 		
 		
 		return mv;
 	}
+	
 	
 	
 	

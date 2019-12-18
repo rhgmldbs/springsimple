@@ -58,5 +58,11 @@ public class MemberDAO {
    }
    
 
+   public ArrayList membTest01() {
+		return (ArrayList) sqlSession.selectList("mSQL.test01");
+	}
    
+   public ArrayList membTest02(HashMap map) {
+		return (ArrayList) sqlSession.selectList("mSQL.test02", map);
+	}
 }

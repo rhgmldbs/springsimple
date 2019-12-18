@@ -174,8 +174,8 @@
          #{pno}, #{mno}, #{oriName}, #{saveName}, #{len}, #{dir}
       )
    </insert>
-   
-   <update id="editInfo" parameterType="mVO"> <!-- 회원정보수정 -->
+ <!--   
+    <update id="editInfo" parameterType="mVO"> 회원정보수정
       UPDATE
          member
       <trim prefix="SET" suffixOverrides=",">
@@ -186,7 +186,7 @@
       </trim>
       WHERE
          m_no = #{mno}
-   </update>
+   </update>  -->
    
    
    <select id="membInfo" resultType="mVO" parameterType="string">
@@ -247,17 +247,62 @@
    
    </insert>
    
-   
    <select id="gallerylist" resultType="gVO">
    
+ 
    SELECT 
-    gno, gtitle title, gdir dir, gsavename saveName,(SELECT m_id FROM member WHERE m_no =gmno )id
+   gno, gtitle title, gdir dir, goriname oriName, gsavename saveName,(SELECT m_id FROM member WHERE m_no = gmno ) id
     
    FROM
    gallery
-	ORDER BY gno dese
+   
+	ORDER BY gno desc
 
+   </select> 
+   
+   
+     <select id="test01" resultType="hashmap" >
+   SELECT
+   	 m_no mno, m_id id, m_name name, m_mail mail,
+     m_tel tel, to_char(m_join, 'yyyy-mm-dd HH24:MI:ss') sDate,
+     m_avt avt, a_img avatar 
+    
+     FROM 
+     	member, avatar 
+     WHERE 
+     	m_avt = a_no
+         
    </select>
+   
+     <select id="test02" resultType="hashmap" parameterType="hashmap">
+     
+      SELECT
+         m_no mno, m_id id, m_name name, m_mail mail,
+         m_tel tel, to_char(m_join, 'yyyy-mm-dd HH24:MI:ss') sDate, 
+         m_avt avt, a_img avatar
+      FROM
+         member, avatar
+      WHERE
+         m_avt = a_no
+         AND m_id = #{id}
+         
+   </select>
+   
+  <update id="editInfo" parameterType="mVO">
+	UPDATE
+		 member
+<set>
+	<if test="pw != null">m_pw = #{pw},</if>
+	<if test="mail != null">m_mail = #{mail},</if>
+	<if test="tel != null">m_tel = #{tel},</if>
+	<if test="avt != 0">m_avt = #{avt},</if>
+</set>
+	<if test="mno != 0">
+	<trim prefix="WHERE" prefixOverrides="AND|OR">
+	<if test="mno != 0">AND m_no = #{mno}</if>
+</trim>
+</if>
+</update>
    
    
 </mapper>

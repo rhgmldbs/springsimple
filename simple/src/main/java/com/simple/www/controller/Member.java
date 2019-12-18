@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.simple.www.dao.*;
 import com.simple.www.services.FileService;
 import com.simple.www.vo.*;
+
 
 @Controller
 @RequestMapping("/member/")
@@ -148,4 +150,29 @@ public class Member {
             
          }
    }
+   
+   
+   @RequestMapping("test.van")
+	public ModelAndView doTest(ModelAndView mv) {
+		ArrayList list = mDAO.membTest01();
+		
+		mv.addObject("LIST", list);
+		mv.setViewName("member/test");
+		return mv;
+		
+	}
+   
+   
+   @RequestMapping("test02.van")
+ 	public ModelAndView doTest(ModelAndView mv, HashMap<String, String> map) {
+	   map.put("id", "kk");
+	   map.put("name", "고희윤");
+	   ArrayList list = mDAO.membTest02(map);
+ 		mv.addObject("LIST", list);
+ 		mv.setViewName("member/test");
+ 		return mv;
+ 	}
+   
+   
+   
 }

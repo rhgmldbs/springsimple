@@ -46,7 +46,7 @@
 					$('#mdate').html(data.sDate);
 					$('#detail').css('display', 'block');
 					
-					$('#infoEdit').click(function(){
+					$('#infoEdit').click(funct{on(){
 						$('#no').html(data.mno);
 						$('#id').html(data.mid);
 						$('#name').html(data.mname);
@@ -132,15 +132,13 @@
 			$(location).attr('href', '/board/boardList.cls');
 		});
 		
-		$('#reboard').click(function(){
-			$(location).attr('href', '/board/reboard.cls');
-		});
+	
 		$('#join').click(function(){
 			$(location).attr('href', '/www/member/join.van');
 		});
 		
 		$('#survey').click(function(){
-			$(location).attr('href', '/survey/survey.cls');
+			$(location).attr('href', '/survey/survey.van');
 		});
 		
 		$('#idlist').click(function(){
@@ -152,7 +150,11 @@
 		});
 		
 		$('#gallerylist').click(function(){
-			$(location).attr('href','/www/board/gallery.van')
+			$(location).attr('href','/www/board/gallerylist.van')
+		});
+		
+		$('#reboard').click(function(){
+			$(location).attr('href','/www/board/reBoardForm.van')
 		});
 		
 		
