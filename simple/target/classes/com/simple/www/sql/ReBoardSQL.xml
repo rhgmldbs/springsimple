@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rbSQL">
+
+	<!-- 게시물 전체 갯수 구하는 질의명령 -->
+
+	<select id="getTotalCount" resultType="int">
+		SELECT
+		count(*)
+
+		FROM
+		reboard
+
+		WHERE
+
+		rb_isshow ='Y'
+	</select>
+	<!-- 게시물조회 질의명령 -->
+	<select id="getList" resultType="rbVO" parameterType="page">
+      SELECT 
+            * 
+            FROM 
+            (
+            SELECT 
+              ROWNUM rno, id, avatar, rbno, body, wDate, upno, (level - 1) lvl 
+           FROM 
+              (
+              SELECT m_id id, a_img avatar, rb_no rbno, rb_body body, to_char(rb_date, 'yyyy/MM/dd')
+               wDate, rb_upno upno 
+           FROM 
+           
+           reboard, member, avatar
+              
+          WHERE 
+           
+           RB_ISSHOW = 'Y'	
+           AND m_no = rb_mno 
+           AND m_avt = a_no ) 
+          
+              START WITH 
+                 UPNO IS NULL 
+              CONNECT BY 
+                 PRIOR RBNO = UPNO 
+              ORDER SIBLINGS BY 
+                 WDATE DESC) 
+              WHERE 
+                 rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+</mapper>
